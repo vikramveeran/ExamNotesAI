@@ -1,7 +1,20 @@
 import React from 'react'
 import { motion } from "motion/react"
 import { FcGoogle } from "react-icons/fc";
+import { signInWithPopup } from 'firebase/auth';
+import { auth, provider } from '../utils/firebase.js';
 const Auth = () => {
+
+  const handleGoogleAuth = async()=>{
+     try {
+      const response = await signInWithPopup(auth,provider)
+      const User = response.user
+      const name = User.displayName
+      const email = User.email
+     } catch (error) {
+      console.log(error)
+     }
+  }
   return (
     <div  className='min-h-screen overflow-hidden bg-white text-black px-8'>
         <motion.header 
@@ -29,7 +42,9 @@ const Auth = () => {
            Unlock smart <br/> AI Notes
             </h1>
 
-            <button  className="flex items-center justify-center gap-2 px-6 py-2.5 mt-4 rounded-xl font-semibold text-white
+            <button 
+            onClick={handleGoogleAuth}
+            className="flex items-center justify-center gap-2 px-6 py-2.5 mt-4 rounded-xl font-semibold text-white
                                           bg-black border border-white/20 shadow-lg shadow-black/30 hover:bg-black hover:border-white/40
                                               hover:scale-105 hover:shadow-xl
                                                     transition-all duration-300">
