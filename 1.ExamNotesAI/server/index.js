@@ -10,7 +10,8 @@ const app = express()
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors(
-  {  origin:"http://localhost:5173",
+  { 
+     origin:"http://localhost:5173",
     credentials:true, //allow cookies
    methods:["GET","PUSH","PUT","DELETE","OPTIONS"] 
   }
@@ -25,3 +26,4 @@ app.listen(PORT,()=>{
 })
 
 // pass SrZOe8iZndFcuKYe
+

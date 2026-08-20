@@ -1,8 +1,10 @@
 import React from 'react'
 import { motion } from "motion/react"
 import { FcGoogle } from "react-icons/fc";
-import { signInWithPopup } from 'firebase/auth';
+import { linkWithCredential, signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../utils/firebase.js';
+import axios from "axios"
+import { serverUrl } from '../App.jsx';
 const Auth = () => {
 
   const handleGoogleAuth = async()=>{
@@ -11,6 +13,10 @@ const Auth = () => {
       const User = response.user
       const name = User.displayName
       const email = User.email
+      const result = await axios.post(serverUrl+"/api/auth/google",{name,email},
+        {WithCredential:true}
+      )
+      console.log(result.data)
      } catch (error) {
       console.log(error)
      }
@@ -34,22 +40,22 @@ const Auth = () => {
 </h1>
         </motion.header>
         <main className='max-w-7xl mx-auto py-10 gird grid-cols-1 1g:grid-cols-2 gap-40 flex justify-center  items-center'>
-         {/* left content */}
+         {/* left content */}     
          <motion.div initial={{ opacity:0,x:-60 }} animate={{ opacity:1,x:0}} transition={{duration:1.5}} className=''>
             <h1 className='text-5xl lg:text-6xl font-extrabold leading-tight bg-gradient-to-br 
              from-black/90 via-black/60 to-black/90 bg-clip-text text-transparent
             '>
            Unlock smart <br/> AI Notes
-            </h1>
+            </h1>                      
 
             <button 
-            onClick={handleGoogleAuth}
+            onClick={handleGoogleAuth} 
             className="flex items-center justify-center gap-2 px-6 py-2.5 mt-4 rounded-xl font-semibold text-white
                                           bg-black border border-white/20 shadow-lg shadow-black/30 hover:bg-black hover:border-white/40
                                               hover:scale-105 hover:shadow-xl
                                                     transition-all duration-300">
                 <FcGoogle />  
-                Continue with google
+                Continue with google                   
             </button>
             <p className="text-sm leading-6 text-gray-400 mt-4">
   You get{" "}
