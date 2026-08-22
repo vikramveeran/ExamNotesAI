@@ -1,8 +1,7 @@
 import UserModel from "../models/user.model.js"
 
-export const getCurrentUser = async () => {
+export const getCurrentUser = async (req,res) => {
     try{
-
         const userId = req.userId
         const user = await UserModel.findById(userId)
         if(!user){
