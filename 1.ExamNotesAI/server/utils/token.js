@@ -7,6 +7,6 @@ export const getToken = async(userId) =>{
         return token
 
      } catch (error) {
-        
+        console.log(error)
      }
 }
