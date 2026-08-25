@@ -1,5 +1,6 @@
 import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import Home from './pages/Home'
 import Auth from './pages/Auth'
 import { useEffect } from 'react'
@@ -12,7 +13,7 @@ const App = () => {
       getCurrentUser(dispatch)
   },[dispatch])
   const{userData} = useSelector((state)=>state.user)
-
+  console.log(userData)
   return (
    <>
    <Routes>

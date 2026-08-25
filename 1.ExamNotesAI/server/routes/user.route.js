@@ -4,6 +4,6 @@ import { getCurrentUser } from "../controllers/user.controller.js"
 
 const userRouter = express.Router()
 
-userRouter.get("/currentUser",isAuth,getCurrentUser)
+userRouter.get("/currentUser", isAuth, getCurrentUser)
 
 export default userRouter
