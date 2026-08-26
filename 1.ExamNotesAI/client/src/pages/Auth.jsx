@@ -76,7 +76,7 @@ const Auth = () => {
                 <Feature index={2} icon="📂" title="Project Notes" des="well-structured documentation for assignment & projects."/>
                 <Feature index={3} icon="📊" title="Charts & Graphs" des="Auto-generated diagram,charts and flow graphs."/>
                 <Feature index={4} icon="⬇️" title="Free PDF Download" des="Download clean printable PDFs instantly."/>
-         </div>
+         </div>  
         </main>
         </div>
   )
