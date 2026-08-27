@@ -1,13 +1,28 @@
 import React from 'react'
 import { AnimatePresence, motion } from "motion/react"
 import logo from "../assets/logo.png"
-import {useSelector} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import {useState} from 'react'
+import { useNavigate } from 'react-router-dom'
+import { serverUrl } from '../App.jsx';
+import { setUserData } from '../redux/userSlice.js';
+import axios from "axios";
 const Navbar = () => {
   const{userData} = useSelector((state) =>state.user)
-  const credits = userData.credits
+  const credits = userData?.credits
   const [showCredits, setShowCredits] = useState(false)
   const [showProfile, setShowProfile] = useState(false)
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const handleSignOut = async () => {
+        try {
+          await axios.post(serverUrl+"/api/auth/logout",{withCredentials:true})
+          dispatch(setUserData(null))
+           navigate("/auth")
+        } catch (error) {
+          console.log(error)
+        }
+  }
   return (
     <motion.div 
     initial={{ opacity:0,x:-60 }} 
@@ -75,14 +90,14 @@ const Navbar = () => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -10 }}
         transition={{ duration: 0.2 }}
-        className="absolute right-0 top-full mt-3 w-64 
+        className="absolute right-0 top-full mt-6 w-64 
                    rounded-2xl bg-black/90 text-gray-300 p-3"
       >
-        <MenuItem text="History" />
+        <MenuItem text="History" onClick={()=>setShowProfile(false)}/>
 
         <div className="h-px bg-white/10 mx-3 my-2" />
 
-        <MenuItem text="SignOut" />
+        <MenuItem text="SignOut" red={true} onClick={handleSignOut}/>
       </motion.div>
     )}
   </AnimatePresence>
@@ -96,7 +111,7 @@ const Navbar = () => {
 function MenuItem({onClick,text,red}){
   return(
      <div onClick={onClick} className={`w-full text px-4 py-3 text-sm 
-    transition-colors ${red ?"text-red-400 hover:bg-red-500/10":"text-grey-200 hover:bg-white/10"}
+    transition-colors ${red ?"text-red-400 hover:bg-red-500/10":"text-gray-200 hover:bg-white/10"}
     `}>
     {text}
    </div>
