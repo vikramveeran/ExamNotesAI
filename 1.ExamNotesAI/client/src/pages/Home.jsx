@@ -3,7 +3,9 @@ import Navbar from '../components/Navbar'
 import { motion } from 'motion/react'
 import img from "../assets/imgg.png"
 import Footer from '../components/Footer'
+import { useNavigate } from 'react-router-dom'
 const Home = () => {
+  const navigate = useNavigate()
   return (
     <div className=' min-h-screen overflow-hidden bg-white text-black'>
        <Navbar/>
@@ -48,7 +50,7 @@ const Home = () => {
               Generate exam-focused notes, project documentation,
               flow diagram and revision-ready content using AI -   <span className="text-gray-400"> faster, cleaner and smarter.</span>
             </motion.p>
-             <button 
+             <button onClick={()=>navigate("/notes")}
                         className="flex items-center justify-center gap-2 px-6 py-2.5 mt-4 rounded-xl font-semibold text-white
                                                       bg-black border border-white/20 shadow-lg shadow-black/30 hover:bg-black hover:border-white/40
                                                           hover:scale-105 hover:shadow-xl

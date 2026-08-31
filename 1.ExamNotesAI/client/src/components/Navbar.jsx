@@ -58,7 +58,7 @@ const Navbar = () => {
             transition={{ duration: 0.5 }} className='absolute right-[-60px] mt-6 w-64 rounded-2xl bg-black/90 text-gray-300 p-3'>
                        <h4 className='font-semibold mb-2 '>Buy Credits</h4>
                        <p className='text-5m  mb-4'>Use credits to generate AI notes, diagram & PDFs.</p>
-                       <button>Buy More Credits</button>
+                       <button onClick={()=>{setShowCredits(false);navigate("/pricing")}}>Buy More Credits</button>
                       </motion.div>
                   }</AnimatePresence>
                 
@@ -93,7 +93,7 @@ const Navbar = () => {
         className="absolute right-0 top-full mt-6 w-64 
                    rounded-2xl bg-black/90 text-gray-300 p-3"
       >
-        <MenuItem text="History" onClick={()=>setShowProfile(false)}/>
+        <MenuItem text="History" onClick={()=>{setShowProfile(false);navigate("/history")}}/>
 
         <div className="h-px bg-white/10 mx-3 my-2" />
 
