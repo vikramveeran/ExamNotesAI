@@ -1,13 +1,14 @@
 import { useState } from "react"
 import {  motion } from "motion/react"
 
-const TopicForm = () => {
+const TopicForm = ({setResult,setLoading,loading,setError}) => {
    const [topic, setTopic] = useState("")
    const [ClassLevel, setClassLevel] = useState("")
    const [examType, setExamType] = useState("")
    const [revisionMode, setRevisionMode] = useState(false)
    const [includeDiagram, setIncludeDiagram] = useState(false)
    const [includeChart, setIncludeChart] = useState(false)
+   
   return (
     <motion.div 
     initial={{opacity:0,y:20}}
@@ -37,8 +38,27 @@ const TopicForm = () => {
              focus:border-white/30 focus:bg-white/[0.06]
              focus:ring-2 focus:ring-white/10" onChange={(e)=>setExamType(e.target.value)} value = {examType}/>     
                   <div className="flex flex-col md:flex-row gap-6">
-                     <Toggle label="revesionmode " checked={revisionMode} onChange={()=>setRevisionMode(!revisionMode)}/>
+                         <Toggle label="Exam Revision Mode" checked={revisionMode} onChange={()=>setRevisionMode(!revisionMode)}/>
+                           <Toggle label="Include Diagram" checked={includeDiagram} onChange={()=>setIncludeDiagram(!includeDiagram)}/>
+                             <Toggle label="Include Charts" checked={includeChart} onChange={()=>setIncludeChart(!includeChart)}/>
                   </div>
+
+                 <motion.button
+  whileHover={!loading ? { scale: 1.05, y: -2 } : {}}
+  whileTap={!loading ? { scale: 0.95 } : {}}
+  disabled={loading}
+  className={`w-full mt-4 py-3 
+    rounded-xl font-semibold flex items-center 
+    justify-center gap-3 
+    transition-all duration-300
+    ${
+      loading
+        ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+        : "bg-gradient-to-br from-white to-gray-200 text-black shadow-[0_15px_35px_rgba(0,0,0,0.25)]"
+    }`}
+>
+  {loading ? "Generating Notes" : "Generate Notes"}
+</motion.button>
     </motion.div>
   )
 }
