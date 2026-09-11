@@ -1,6 +1,10 @@
 const Gemini_URL = "https://generativelanguage.googleapis.com/v1beta/interactions"
 
-const response = await fetch(`{Gemini_URL}?key=${process.env.GEMINI_API_KEY}` ,{
+export const generateGeminiResponse = async(prompt)=>{
+
+
+  try {
+ const response = await fetch(`{Gemini_URL}?key=${process.env.GEMINI_API_KEY}` ,{
   method: "POST",
 
   headers: {
@@ -21,7 +25,7 @@ const response = await fetch(`{Gemini_URL}?key=${process.env.GEMINI_API_KEY}` ,{
   })
 });
 
-try {
+
   if(!response.ok){
       const err = await response.text()
       throw new Error(err);
@@ -44,6 +48,8 @@ const cleanText = text
 } catch (error) {
   console.log("Gemini Fetch Error",error.message);
   throw new error("Gemini API fetch failed")
+}
+
 }
 
 
