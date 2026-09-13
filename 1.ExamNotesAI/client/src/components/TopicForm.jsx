@@ -1,5 +1,6 @@
 import { useState } from "react"
 import {  motion } from "motion/react"
+import { generateNotes } from "../services/api.js"
 
 const TopicForm = ({setResult,setLoading,loading,setError}) => {
    const [topic, setTopic] = useState("")
@@ -9,6 +10,31 @@ const TopicForm = ({setResult,setLoading,loading,setError}) => {
    const [includeDiagram, setIncludeDiagram] = useState(false)
    const [includeChart, setIncludeChart] = useState(false)
    
+   const handleSubmit = async() =>{
+    if(!topic.trim()){
+       setError("please enter the topic")
+       return;
+    }
+    setError("")
+    setLoading(true)
+    setResult(null)
+     try {
+      const result = generateNotes({
+        topic,
+        ClassLevel,
+        revisionMode,
+        includeDiagram,
+        includeChart})
+        setResult(result.data)
+        setLoading(false)
+     } catch (error) {
+       console.log(error)
+       setError("Failed to fetch notes from server");
+       setLoading(false)
+     }
+   }
+
+
   return (
     <motion.div 
     initial={{opacity:0,y:20}}
@@ -26,13 +52,13 @@ const TopicForm = ({setResult,setLoading,loading,setError}) => {
              focus:border-white/30 focus:bg-white/[0.06]
              focus:ring-2 focus:ring-white/10" onChange={(e)=>setTopic(e.target.value)} value = {topic}/>
 
-   <input type="text" placeholder="Enter topic (e.g. class 10th)" className="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3
+   <input type="text" placeholder="Enter class (e.g. class 10th)" className="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3
              text-white placeholder:text-gray-500
              outline-none transition-all duration-300
              focus:border-white/30 focus:bg-white/[0.06]
              focus:ring-2 focus:ring-white/10" onChange={(e)=>setClassLevel(e.target.value)} value = {ClassLevel}/>
             
-    <input type="text" placeholder="Enter topic (e.g. CBSE,JEE,NEET)" className="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3
+    <input type="text" placeholder="Enter Exam (e.g. CBSE,JEE,NEET)" className="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3
              text-white placeholder:text-gray-500
              outline-none transition-all duration-300
              focus:border-white/30 focus:bg-white/[0.06]
@@ -44,6 +70,7 @@ const TopicForm = ({setResult,setLoading,loading,setError}) => {
                   </div>
 
                  <motion.button
+                 onClick={handleSubmit}
   whileHover={!loading ? { scale: 1.05, y: -2 } : {}}
   whileTap={!loading ? { scale: 0.95 } : {}}
   disabled={loading}

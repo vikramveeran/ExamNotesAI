@@ -1,6 +1,5 @@
 import express from "express"
 import isAuth from "../middleware/isAuth.js"
-import { getCurrentUser } from "../controllers/user.controller.js"
 import { generateNotes } from "../controllers/generate.controller.js";
 
 const notesRouter = express.Router()

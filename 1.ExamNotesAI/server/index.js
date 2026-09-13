@@ -7,7 +7,6 @@ import cors from "cors"
 import userRouter from "./routes/user.route.js"
 import notesRouter from "./routes/generate.route.js"
 dotenv.config()
-
 const app = express()
 app.use(express.json())
 app.use(cookieParser())
@@ -22,7 +21,7 @@ const PORT = process.env.PORT || 5000
 
 app.use("/api/auth",authRouter)
 app.use("/api/user",userRouter)
-app.use("api/notes",notesRouter)
+app.use("/api/notes",notesRouter)
 app.listen(PORT,()=>{
     console.log(`server running on port ${PORT}`)
     connectDb()

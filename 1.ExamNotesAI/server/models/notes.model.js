@@ -15,11 +15,11 @@ const notesSchema = new mongoose.Schema({
     default:false
    },
    includeDiagram:Boolean,
-   includeCharts:Boolean,
+   includeChart:Boolean,
 
    content:{
     type:mongoose.Schema.Types.Mixed,
-    reqired:true
+    required:true
    }
 
 },{timestamps:true})
@@ -27,4 +27,5 @@ const notesSchema = new mongoose.Schema({
 const Notes = mongoose.model("Notes",notesSchema)  
 
 export default Notes
+
 
