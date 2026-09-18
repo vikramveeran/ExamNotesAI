@@ -13,9 +13,9 @@ const Navbar = () => {
   const [showCredits, setShowCredits] = useState(false)
   const [showProfile, setShowProfile] = useState(false)
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch()       
   const handleSignOut = async () => {
-        try {
+        try {      
           await axios.post(serverUrl+"/api/auth/logout",{withCredentials:true})
           dispatch(setUserData(null))
            navigate("/auth")
@@ -50,7 +50,7 @@ const Navbar = () => {
                 </motion.div>
                
                 <AnimatePresence>
-                  {showCredits &&
+                  {showCredits && 
                       <motion.div 
                       initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}

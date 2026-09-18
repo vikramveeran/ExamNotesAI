@@ -71,7 +71,7 @@ Return ONLY raw valid JSON containing the notes content.
     return res.status(200).json({
       data: aiResponse,
       noteId: createdNote._id,
-      creditLeft: user.credits,
+      creditsLeft: user.credits,
     });
   } catch (error) {
     console.error("Backend Controller Error:", error);
