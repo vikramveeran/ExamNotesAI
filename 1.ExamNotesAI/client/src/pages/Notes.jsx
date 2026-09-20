@@ -79,7 +79,7 @@ const Notes = () => {
           flex items-center justify-center
           rounded-full
           bg-white
-          text-xs
+          text-xs font-bold
         "
       >
         ➕
@@ -113,32 +113,48 @@ const Notes = () => {
 
 </motion.div>
 
-{loading && <motion.div
+{loading && (<motion.div
 animate={{opacity:[0.4,1,0.4]}}
 transition={{repeat:Infinity,duration:1.2}}
 className='text-center text-black font-medium mb-6'
 >
  Generating exam-focused notes...
-  </motion.div>}
+  </motion.div>)}
   {error && (<div className='mb-6 text-center text-red-600  font-medium'>
     {error}
   </div>)}
 
-  {!result && <motion.div  whileHover={{scale:1.02}} 
-  className='h-64 
-  rounded-2xl 
-  flex flex-col items-center justify-center 
-  bg-white/60 backdrop-blur-lg 
-  border border-dashed border-gray-300 
-  text-gray-500 shadow-inner'>
-    <span className='texgt-4xl mb-3'>
-      📘
-    </span>
-    <p>Generating notes appear here</p>
-     
-   </motion.div>}
+  {!result && (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    whileHover={{ scale: 1.01 }}
+    className="
+      w-[85%]
+      mx-auto
+      mt-8
+      h-32
+      rounded-2xl
+      bg-white
+      shadow-md
+      flex
+      items-center
+      justify-center
+    "
+  >
+    <div className="text-center text-gray-400">
+      <div className="text-3xl mb-2">
+        📘
+      </div>
 
-   { result && < motion.div 
+      <p className="text-sm">
+        Generating notes will appear here
+      </p>
+    </div>
+  </motion.div>
+)}
+
+   { result && <motion.div 
    initial={{opacity:0,y:30}}
    animate={{opacity:1,y:0}}
    transition={{duration:0.4}}
@@ -150,7 +166,7 @@ className='text-center text-black font-medium mb-6'
    </div>
    <div className='lg:col-span-3 rounded-2xl bg-white 
    shadow-[0_15px_40px_rgba(0,0,0,0.15)] p-6'>
-    <FinalResult />
+    <FinalResult result={result}/>                    
      
    </div>
    </motion.div>}
@@ -158,4 +174,4 @@ className='text-center text-black font-medium mb-6'
   )
 }
 
-export default Notes
+export default Notes                                      
