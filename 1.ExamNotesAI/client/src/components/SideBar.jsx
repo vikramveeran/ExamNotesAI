@@ -14,7 +14,7 @@ const Sidebar = ({result}) => {
            </div>
            <section>
               <p className='text-sm font-semibold text-gray-700 mb-3'>
-               ⭐sub Topics(priority Wise)
+               ⭐sub Topics(priority Wise) 
               </p>
               {
                 object.entries(result.subtopics).map(([star,topics])=>{
@@ -31,6 +31,50 @@ const Sidebar = ({result}) => {
                    </div>
                 })
               }
+           </section>
+           <section className='rounded-lg bg-yellow-50 border border-yellow-200 p-3'>
+               <p className='text-sm font-semibold text-gray-700 mb-1'>
+                 🔥Exam Imprtance
+               </p>
+               <span className='text-yellow-700 font-bold tex-sm'>
+                {result.importance}
+               </span>
+               <p className='text-sm mt-2 font-semibold text-gray-700 mb-3'>
+                ❓Important Question
+                </p>
+                <div className='mb-4 rounded-lg bg-indigo-50
+                border border-indigo-200 p-3'>
+                  <p className='text-sm font-medium text-indigo-700 mb-2'>
+                      Short questions
+                      </p>
+                      <ul className='list-disc ml-4 text-sm text-gray-700 space-y-1'>
+                        {result.questions.short.map((t,i)=>{
+                         <li key={i}>{t}</li>
+                       })}
+                      </ul>
+                </div>
+
+                <div className='mb-4 rounded-lg bg-indigo-50
+                border border-purple-200 p-3'>
+                  <p className='text-sm font-medium text-purple-700 mb-2'>
+                     Long Questions
+                      </p>
+                      <ul className='list-disc ml-4 text-sm text-gray-700 space-y-1'>
+                       {result.questions.long.map((t,i)=>{
+                         <li key={i}>{t}</li>
+                       })}
+                      </ul>
+                </div>
+
+                 <div className='mb-4 rounded-lg bg-indigo-50
+                border border-blue-200 p-3'>
+                  <p className='text-sm font-medium text-blue-700 mb-2'>
+                     Diagram Questions
+                      </p>
+                      <ul className='list-disc ml-4 text-sm text-gray-700 space-y-1'>
+                        <li>{result.questions.diagram}</li>
+                      </ul>
+                </div>
            </section>
     </div>
   )

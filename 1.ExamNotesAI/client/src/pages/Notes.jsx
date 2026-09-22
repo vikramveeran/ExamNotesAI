@@ -3,7 +3,7 @@ import { motion } from "motion/react"
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import TopicForm from '../components/TopicForm'
-import Sidebar from '../components/Sidebar'
+import Sidebar from '../components/SideBar'
 import FinalResult from '../components/FinalResult'
 function Notes() {
   const navigate = useNavigate()
