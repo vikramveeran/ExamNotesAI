@@ -1,4 +1,5 @@
 import React from 'react'
+import reactMarkDown from 'react-markdown'
 const markDownComponent = {
        h1:({children})=>(
          <h1 className='text-2xl font-bold text-indigo-700 mt-6 mb-4 border-b pb-2'>
@@ -32,10 +33,31 @@ const markDownComponent = {
        ),
   }
 const FinalResult = ({result}) => {
-  
+    if(!result || !result.subTopics ||
+      !result.questions || !result.questions.short ||
+      !result.questions.long || !result.revisionPoints
+     ){
+       return null;
+     }
   return(
-    <div>
-     
+    <div className='mt-6 p-3 space-y-10 bg-white'>
+       <div className='flex flex-col md:flex-row md:items-center md:justify-between gap-4'>
+             <h2 className='text-3xl font-bold bg_gradient-to-r from-indigo-600 to-purple-600
+             bg-clip-text text-transparent'>
+               📘 Generated Notes
+             </h2>
+             <div className='flex gap-3'>
+                    <button className=''></button>
+                    <button></button>
+             </div>
+       </div>
+       <section>
+         <div className='bg-white border border-gray-200 rounded-xl p-6'>
+                  <reactMarkDown components={markDownComponent}>
+                        {result.notes}
+                  </reactMarkDown>
+         </div>
+       </section>
     </div>
   )
 }
