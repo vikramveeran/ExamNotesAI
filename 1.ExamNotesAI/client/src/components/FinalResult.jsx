@@ -46,10 +46,18 @@ const FinalResult = ({result}) => {
              bg-clip-text text-transparent'>
                📘 Generated Notes
              </h2>
-             <div className='flex gap-3'>
-                    <button className=''></button>
-                    <button></button>
-             </div>
+              <div className='flex gap-3'>
+                                 <button onClick={() => setQuickRevision(!quickRevision)} className={`
+                           px-4 py-2 rounded-lg text-sm font-medium transition
+                           ${quickRevision
+                                         ? "bg-green-600 text-white"
+                                         : "bg-green-100 text-green-700 hover:bg-green-200"}
+                         `}>  {quickRevision ? "Exit Revision Mode" : "Quick Revision (5 min)"}</button>
+                                 <button onClick={()=>downloadPdf(result)}
+                                 className='px-4 py-2 rounded-lg text-sm font-medium bg-indigo-600 text-white hover:bg-indigo-700'>
+                                     ⬇️ Download PDF
+                                 </button>
+                             </div>
        </div>
        <section>
          <div className='bg-white border border-gray-200 rounded-xl p-6'>
